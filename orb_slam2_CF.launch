@@ -1,0 +1,37 @@
+<launch>
+    <!-- ARGS -->
+    <arg name="camera_frame" default="camera_frame"/>
+    <arg name="camera_optical_frame" default="camera_optical"/>
+    <arg name="pose_topic" default="orb_slam2_pose"/>
+    <arg name="camera_topic" default="/camera/image_raw"/>
+    <arg name="path_vocabulary" default="/lab/3rdparty/ORB_SLAM2/Vocabulary/ORBvoc.txt"/>
+    <arg name="path_settings" default="$(find orb_slam2_wrapper)/config/CF3.yaml"/>
+    <arg name="use_viewer" default="true"/>
+
+    <arg name="orb_var_x" default="0.001"/>
+    <arg name="orb_var_y" default="0.001"/>
+    <arg name="orb_var_z" default="0.001"/>
+    <arg name="orb_var_roll" default="0.001"/>
+    <arg name="orb_var_pitch" default="0.001"/>
+    <arg name="orb_var_yaw" default="0.03"/>
+
+    <!-- ORB SLAM 2 -->
+    <param name="camera_frame" value="$(arg camera_frame)"/>
+    <param name="camera_optical_frame" value="$(arg camera_optical_frame)"/>
+    <param name="pose_topic" value="$(arg pose_topic)"/>
+    <param name="camera_topic" value="$(arg camera_topic)"/>
+    <param name="path_vocabulary" value="$(arg path_vocabulary)"/>
+    <param name="path_settings" value="$(arg path_settings)"/>
+    <param name="use_viewer" value="$(arg use_viewer)"/>
+
+    <param name="orb_var_x" value="$(arg orb_var_x)"/>
+    <param name="orb_var_y" value="$(arg orb_var_y)"/>
+    <param name="orb_var_z" value="$(arg orb_var_z)"/>
+    <param name="orb_var_roll" value="$(arg orb_var_roll)"/>
+    <param name="orb_var_pitch" value="$(arg orb_var_pitch)"/>
+    <param name="orb_var_yaw" value="$(arg orb_var_yaw)"/>
+
+    <node pkg="orb_slam2_wrapper" type="orb_slam2_mono_node" name="orb_slam2_mono_node" output="screen"/>
+</launch>
+
+

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="uri" default="radio://0/80/2M/E7E7E7E712" /> <!--Adjust this parameter-->
+  <arg name="frame" default="crazyflie7" /> 
+
+  <include file="$(find crazyflie_driver)/launch/crazyflie_server.launch">
+  </include>
+
+  <group ns="crazyflie7">
+    <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
+      <param name="uri" value="$(arg uri)" />
+      <param name="tf_prefix" value="crazyflie7" />
+      <param name="enable_logging" value="False" /> <!--Logging disabled to reduce bandwith-->
+      <param name="enable_logging_imu" value="False" />
+      <param name="enable_logging_temperature" value="False" />
+      <param name="enable_logging_magnetic_field" value="False" />
+      <param name="enable_logging_pressure" value="False" />
+      <param name="enable_logging_battery" value="False" />
+      <param name="enable_logging_packets" value="False" />
+      <rosparam>
+        genericLogTopics: ["log1"]
+        genericLogTopicFrequencies: [100]
+        genericLogTopic_log1_Variables: ["stateEstimate.x", "stateEstimate.y", "stateEstimate.z"]
+      </rosparam>
+    </node>
+
+    <node name="publish_external_position_RS_OB" pkg="crazyflie_demo" type="publish_external_position_RS_OBC.py" args ="$(arg frame)" output="screen"> 
+      <!--<param name="topic" value="/crazyflie7/vrpn_client_node/crazyflie7/pose" />-->
+    </node> 
+    
+  </group>
+</launch>
